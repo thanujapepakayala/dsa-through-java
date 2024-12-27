@@ -1,0 +1,49 @@
+import java.util.*;
+class Node{
+    String data;
+    Node left;
+    Node right;
+    Node(String val){
+        this.data= val;
+        this.left = null;
+        this.right = null;
+    }
+}
+public class Main
+{
+    static void inorder(Node root){
+        if(root==null){
+            return;
+        }
+        inorder(root.left);
+        System.out.print(root.data+" ");
+        inorder(root.right);
+    }
+	public static void main(String[] args) {
+		Queue<Node> q = new LinkedList<>();
+		String a="1 2 3 4 5 6 7 8";
+		String[] arr = a.split(" ");
+		
+		Node root = new Node(arr[0]);
+		q.add(root);
+        Node newNode;
+        Node curr ;
+		int i=1;
+		while(i<arr.length){
+		    curr = q.poll();
+		    newNode = new Node(arr[i]);
+		    curr.left = newNode;
+		    q.add(newNode);
+		    i++;
+		    if(i>=arr.length){
+		        break;
+		    }
+		    newNode = new Node(arr[i]);
+		    curr.right = newNode;
+		    q.add(newNode);
+		    i++;
+		}
+		
+		inorder(root);
+	}
+}
